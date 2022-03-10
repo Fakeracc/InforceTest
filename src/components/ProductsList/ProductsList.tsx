@@ -1,7 +1,7 @@
 import React, {useEffect,useState} from 'react';
 import {ProductModel} from "../../models/product.model";
 import ProductModal from "../Modal/Modal";
-import {deleteProduct, editProduct, getProducts} from "../../api/products/productsRequests";
+import {deleteProduct, getProducts} from "../../api/products/productsRequests";
 import styles from "./ProductsList.module.scss"
 
 

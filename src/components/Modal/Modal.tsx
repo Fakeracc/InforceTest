@@ -24,7 +24,8 @@ const ProductModal: React.FC<ModalProps> = ({show,onHide,products, setProducts})
     const [weight, setWeight] = useState<string>('');
     const [comments, setComments] = useState([])
 
-    const newProduct: Omit<ProductModel, "id"> = {
+    const newProduct: ProductModel = {
+        id: products.length + 1,
         name: name,
         imageUrl: imageUrl,
         count: count,
@@ -38,7 +39,7 @@ const ProductModal: React.FC<ModalProps> = ({show,onHide,products, setProducts})
 
     const addProductHandle = async () => {
         await addProduct(newProduct);
-        setProducts(products.unshift(newProduct as ProductModel))
+        products.unshift(newProduct as ProductModel)
         onHide();
     };
 
