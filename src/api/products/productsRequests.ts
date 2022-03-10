@@ -9,7 +9,6 @@ const getProducts = async (): Promise<ProductModel[]> => {
 
 const addProduct = async (product: Omit<ProductModel ,'id'>): Promise<number> => {
     const response = await axios.post('https://6228c2299fd6174ca82e7fe6.mockapi.io/api/market',{
-        id: nanoid(),
         ...product,
     });
     return response.data.id;
