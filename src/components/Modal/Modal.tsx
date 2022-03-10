@@ -23,6 +23,7 @@ const ProductModal: React.FC<ModalProps> = ({show,onHide,products, setProducts})
     const [height, setHeight] = useState<any>();
     const [weight, setWeight] = useState<string>('');
     const [comments, setComments] = useState([])
+    Modal.setAppElement('#root')
 
     const newProduct: ProductModel = {
         id: products.length + 1,
@@ -38,8 +39,15 @@ const ProductModal: React.FC<ModalProps> = ({show,onHide,products, setProducts})
     };
 
     const addProductHandle = async () => {
-        await addProduct(newProduct);
-        products.unshift(newProduct as ProductModel)
+       if(newProduct.name.trim() &&
+           newProduct.imageUrl.trim() &&
+           newProduct.count &&
+           newProduct.size &&
+           newProduct.weight.trim()
+       ) {
+            await addProduct(newProduct);
+            products.unshift(newProduct as ProductModel)
+        }
         onHide();
     };
 
