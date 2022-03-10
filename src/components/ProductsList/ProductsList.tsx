@@ -25,7 +25,7 @@ const ProductsList = () => {
     // }
 
 
-    const removeProduct = async (id: number | string): Promise<number> => {
+    const removeProduct = async (id: number): Promise<number> => {
         const response = await deleteProduct(id);
         setProducts(products.filter((product: ProductModel) => product.id !== id))
         return response

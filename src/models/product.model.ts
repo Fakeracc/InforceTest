@@ -7,7 +7,7 @@ export interface CommentsModel{
 }
 
 export interface ProductModel{
-    id: number | string;
+    id: number;
     imageUrl: string;
     name: string;
     count: number;
