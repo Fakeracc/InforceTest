@@ -13,7 +13,7 @@ const Input: React.FC<CustomInputInterface> = ({
 }) => {
     return (
             <label className="custom-field one">
-                <input {...props} type="text" placeholder={placeholder ? placeholder : ''}/>
+                <input {...props} placeholder={placeholder ? placeholder : ''}/>
             </label>
     );
 };

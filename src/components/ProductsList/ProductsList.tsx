@@ -1,38 +1,33 @@
 import React, {useEffect,useState} from 'react';
 import {ProductModel} from "../../models/product.model";
-import ProductModal from "../Modal/Modal";
-import {deleteProduct, getProducts} from "../../api/products/productsRequests";
+import ProductModal from "../ProductModal/ProductModal";
 import styles from "./ProductsList.module.scss"
+import {useActions, useTypedSelector} from "../../hooks/reduxHooks";
+import ConfirmDeleteModal from "../ConfirmDeleteModal/ConfirmDeleteModal";
 
 
 const ProductsList = () => {
-    const [products, setProducts] = useState<ProductModel | any>([]);
     const [modalVisible, setModalVisible] = useState(false);
+    const [confirmModalVisible, setConfirmModalVisible] = useState(false)
+    const {products} = useTypedSelector(state => state.products)
+    const {fetchProducts} = useActions();
+    const [edit,setEdit] = useState<any>(null)
 
 
+    const editProduct = (product: ProductModel) => {
+        if(product !== null){
+            setEdit(product);
+        }
+        setModalVisible(true)
+    }
 
-    const fetchProducts = async (): Promise<void> => {
-        const responseData: ProductModel[] = await getProducts();
-        await setProducts(responseData)
-    };
-
-    // const updateProduct = async (id: number | string): Promise<(product: ProductModel) => Promise<number>> => {
-    //     return async (product: ProductModel): Promise<number> => {
-    //         const response = await editProduct(product, id);
-    //         await fetchProducts();
-    //         return response
-    //     }
-    // }
-
-
-    const removeProduct = async (id: number): Promise<number> => {
-        const response = await deleteProduct(id);
-        setProducts(products.filter((product: ProductModel) => product.id !== id))
-        return response
+    const confirmDelete = (product: ProductModel) => {
+        setEdit(product)
+        setConfirmModalVisible(true)
     }
 
     useEffect(() => {
-      fetchProducts();
+      fetchProducts()
     },[])
 
     return (
@@ -48,11 +43,13 @@ const ProductsList = () => {
                        <th>Height</th>
                        <th>Weight</th>
                        <th>Actions</th>
+                       <th>Image</th>
                        <th>Comments</th>
                    </tr>
                 </thead>
                 <tbody>
-                {products.length ? (
+
+                {products?.length ? (
                     products.map((product: ProductModel) =>
                       <tr key={product.id}>
                           <td>{product.id}</td>
@@ -62,18 +59,32 @@ const ProductsList = () => {
                           <td>{product.size.height}</td>
                           <td>{product.weight}</td>
                           <td>
-                              <button>Edit product</button>
-                              <button onClick={() => removeProduct(product.id)}>Delete product</button>
+                              <button onClick={() => editProduct(product)}>Edit product</button>
+                              <button onClick={() => confirmDelete(product)}>Delete product</button>
+                          </td>
+                          <td>
+                              <img alt="Some product"
+                                   // height={product.size.height}
+                                   // width={product.size.width}
+                                   height={50}
+                                   width={50}
+                                   src={product.imageUrl}
+                              />
                           </td>
                       </tr>
                     )
                 ) : null}
                 </tbody>
             </table>
+            <ConfirmDeleteModal
+                showConfirmModal={confirmModalVisible}
+                setShowConfirmModal={setConfirmModalVisible}
+                editProduct={edit}
+            />
             <ProductModal
                 show={modalVisible}
                 onHide={() => setModalVisible(false)}
-                // updateProductModal={updateProduct(product.id)}
+                editProduct={edit}
                 products={products}
             />
         </>

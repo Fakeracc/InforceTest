@@ -1,10 +1,4 @@
-
-export interface CommentsModel{
-    id: number;
-    productId: number | string;
-    description: string;
-    date: Date;
-}
+import {CommentsModel} from "./comments.model";
 
 export interface ProductModel{
     id: number;

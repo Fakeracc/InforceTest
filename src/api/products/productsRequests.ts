@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 import {ProductModel} from "../../models/product.model";
 
 const getProducts = async (): Promise<ProductModel[]> => {
@@ -6,11 +6,11 @@ const getProducts = async (): Promise<ProductModel[]> => {
     return response.data;
 }
 
-const addProduct = async (product: Omit<ProductModel ,'id'>): Promise<number> => {
-    const response = await axios.post('https://6228c2299fd6174ca82e7fe6.mockapi.io/api/market',{
+const addProduct = async (product: ProductModel): Promise<ProductModel> => {
+    await axios.post('https://6228c2299fd6174ca82e7fe6.mockapi.io/api/market',{
         ...product,
     });
-    return response.data.id;
+    return product;
 }
 
 const editProduct = async (product: ProductModel, id: number): Promise<number> => {
