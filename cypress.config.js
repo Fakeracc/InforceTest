@@ -7,6 +7,5 @@ module.exports = defineConfig({
     supportFile: false,
     screenshotOnRunFailure: false,
     video: false,
-    downloadsFolder: false
   }
 })
