@@ -1,9 +1,8 @@
-import React, {SetStateAction, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Modal from 'react-modal';
 import {ProductModel} from "../../models/product.model";
 import Input from "../custom/Input/Input";
 import styles from './ProductModal.module.scss'
-import {createProduct, updateProducts} from "../../store/action-creators/products";
 import {CommentsModel} from "../../models/comments.model";
 import {useActions} from "../../hooks/reduxHooks";
 
@@ -94,6 +93,7 @@ const ProductModal: React.FC<ModalProps> = ({show,onHide,products, editProduct})
         if(editProduct){
             setEditProduct();
         }
+        //eslint-disable-next-line
     }, [editProduct]);
 
     return (

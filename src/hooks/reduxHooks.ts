@@ -1,7 +1,6 @@
 import {TypedUseSelectorHook, useSelector} from "react-redux";
 import {useDispatch} from "react-redux";
 import {bindActionCreators} from "redux";
-//import ActionCreators from '../store/action-creators/'
 import {RootState} from "../store/reducers";
 import ActionCreators from "../store/action-creators";
 

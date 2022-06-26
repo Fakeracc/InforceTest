@@ -1,6 +1,5 @@
 import React, {Dispatch, SetStateAction} from 'react';
 import styles from "../ProductModal/ProductModal.module.scss";
-import Input from "../custom/Input/Input";
 import Modal from "react-modal";
 import {ProductModel} from "../../models/product.model";
 import {useActions} from "../../hooks/reduxHooks";

@@ -1,4 +1,4 @@
-import axios, {AxiosResponse} from "axios";
+import axios from "axios";
 import {ProductModel} from "../../models/product.model";
 
 const getProducts = async (): Promise<ProductModel[]> => {

@@ -28,7 +28,7 @@ const ProductsList = () => {
 
     useEffect(() => {
       fetchProducts()
-    },[])
+    },[fetchProducts])
 
     return (
         <>
